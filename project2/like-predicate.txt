@@ -1,0 +1,3 @@
+The 'LIKE' predicate is used on all search queries (title, year, director, star) to search through
+their respective column. All search query options use substring matching. The database will return
+movies that contain the user provided search query anywhere in its respective column entry.

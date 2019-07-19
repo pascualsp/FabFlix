@@ -1,0 +1,73 @@
+CREATE TABLE IF NOT EXISTS movies (
+	id VARCHAR(10) PRIMARY KEY NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    year INT NOT NULL,
+    director VARCHAR(100) NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS stars (
+	id VARCHAR(10) PRIMARY KEY NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    birthYear INT
+);
+
+
+CREATE TABLE IF NOT EXISTS stars_in_movies (
+	starId VARCHAR(10) NOT NULL REFERENCES stars(id),
+    movieId VARCHAR(10) NOT NULL REFERENCES movies(id)
+);
+
+
+CREATE TABLE IF NOT EXISTS genres (
+	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    name VARCHAR(32) NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS genres_in_movies (
+	genreId INT NOT NULL REFERENCES genres(id),
+    movieId VARCHAR(10) NOT NULL REFERENCES movies(id)
+);
+
+
+CREATE TABLE IF NOT EXISTS customers (
+	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    firstName VARCHAR(50) NOT NULL,
+	lastName VARCHAR(50) NOT NULL,
+    ccId VARCHAR(20) NOT NULL REFERENCES creditcards(id),
+    address VARCHAR(200) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    password VARCHAR(20) NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS sales (
+	id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    customerId INT NOT NULL REFERENCES customers(id),
+    movieId VARCHAR(10) NOT NULL REFERENCES movies(id),
+    saleDate date NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS creditcards (
+	id VARCHAR(20) PRIMARY KEY NOT NULL,
+    firstName VARCHAR(50) NOT NULL,
+    lastName VARCHAR(50) NOT NULL,
+    expiration date NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS ratings (
+	movieId VARCHAR(10) NOT NULL REFERENCES movies(id),
+    rating FLOAT NOT NULL,
+    numVotes INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS employees (
+	email VARCHAR(50) PRIMARY KEY,
+    password VARCHAR(20) NOT NULL,
+    fullname VARCHAR(100)
+);
+
+
